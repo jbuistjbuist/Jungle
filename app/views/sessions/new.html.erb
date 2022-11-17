@@ -1,6 +1,6 @@
-<h1>Login</h1>
+<h1 class="auth_header">Login</h1>
 
-<%= form_tag '/login' do %>
+<%= form_tag '/login', class: "auth_form" do %>
 
    <% if @user && @user.errors.any? || @noemail %>
       <div class="alert alert-danger">
