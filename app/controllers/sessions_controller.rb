@@ -4,16 +4,11 @@ class SessionsController < ApplicationController
   end
 
   def create 
-    @user = User.find_by_email(params[:email])
-    if @user && @user.authenticate(params[:password])
+    if @user = User.authenticate_with_credentials(params[:email], params[:password])
       session[:user_id] = @user.id 
       redirect_to root_path
     else
-      if !@user 
-        @noemail = "Email not found"
-      else 
-        @user.errors.add(:password, "is invalid")
-      end
+      @unable_login = "Email not found or password invalid"
       render :new
     end
   end 
